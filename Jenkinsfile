@@ -40,8 +40,10 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts "${env.BUILD_ID}/sources/dist/prog"
-                    sh "rm -rf ${env.BUILD_ID}/sources/build ${env.BUILD_ID}/sources/dist"
+                    // Jenkins ist schlau genug, das Muster im gesamten Workspace zu finden
+                    archiveArtifacts "**/sources/dist/prog"
+                    // Aufräumen des spezifischen Build-Ordners
+                    sh "rm -rf ${env.BUILD_ID}"
                 }
             }
         }
