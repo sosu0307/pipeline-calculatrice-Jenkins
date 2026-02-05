@@ -9,6 +9,8 @@ pipeline {
             steps {
                 sh 'python3.8 -m py_compile sources/prog.py sources/calc.py'
                 stash(name: 'compiled-results', includes: 'sources/*.py*')
+                echo "Webhook Test erfolgreich!"
+
             }
         }
 
@@ -46,6 +48,9 @@ pipeline {
                     sh "rm -rf ${env.BUILD_ID}"
                 }
             }
+        }
+        stage('Branch Info') {
+            steps { echo "Du arbeitest gerade auf dem Branch: ${env.BRANCH_NAME}" }
         }
 
     } // Ende von stages
